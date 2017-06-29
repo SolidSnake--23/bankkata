@@ -1,12 +1,17 @@
 package domain.operation;
 
+import java.math.BigDecimal;
 import java.util.function.Consumer;
 
 public class Amount {
-    private double value;
+    private BigDecimal value;
 
     public Amount(double value) {
 
+        this.value = new BigDecimal(value);
+    }
+
+    public Amount(BigDecimal value) {
         this.value = value;
     }
 
@@ -17,12 +22,12 @@ public class Amount {
 
         Amount amount = (Amount) o;
 
-        return value == amount.value;
+        return value != null ? value.equals(amount.value) : amount.value == null;
     }
 
     @Override
     public int hashCode() {
-        return (int) (value);
+        return value != null ? value.hashCode() : 0;
     }
 
     @Override
@@ -32,16 +37,16 @@ public class Amount {
                 '}';
     }
 
-    public double getValue() {
+    public BigDecimal getValue() {
         return value;
     }
 
     public Amount minus(Amount amount) {
-        return new Amount(this.value - amount.value);
+        return new Amount(this.value.min(amount.value));
     }
 
     public Amount add(Amount amount) {
-        return new Amount(this.value + amount.value);
+        return new Amount(this.value.add(amount.value));
     }
 
     public void print(Consumer<String> printer) {

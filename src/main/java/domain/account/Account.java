@@ -2,15 +2,11 @@ package domain.account;
 
 import domain.operation.Amount;
 import domain.operation.OperationRepository;
-import domain.operation.Operations;
 
 public class Account {
 
     private OperationRepository operationRepository;
     private Viewer viewer;
-
-    private Operations operations;
-    private Amount balance;
 
     public Account(OperationRepository operationRepository, Viewer viewer) {
         this.operationRepository = operationRepository;

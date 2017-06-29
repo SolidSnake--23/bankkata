@@ -39,7 +39,7 @@ public class AccountTest {
     }
 
     @Test
-    public void should_retrieve_all_statements() throws Exception {
+    public void should_retrieve_all_operations() throws Exception {
         Account account = new Account(operationRepository, viewer);
 
         Operations operations = new Operations(new Withdraw(new Amount(10), new Clock()), new Deposit(new Amount(10), new Clock()));
